@@ -203,6 +203,7 @@ Contributions are welcome. Please take a quick look at the [contribution guideli
 ## Data Generators
  * [faker](https://github.com/askn/faker) - A library for generating fake data
  * [hashids.cr](https://github.com/splattael/hashids.cr) - A library to generate YouTube-like ids from one or many numbers
+ * [prime](https://github.com/wontruefree/prime) - A prime number generator
 
 ## Database Drivers/Clients
  * [couchdb.cr](https://github.com/TechMagister/couchdb.cr) - CouchDB client
@@ -226,6 +227,7 @@ Contributions are welcome. Please take a quick look at the [contribution guideli
 
 ## Dependency Injection
  * [Crystal-DI](https://github.com/funk-yourself/crystal-di) - Lightweight DI Container
+ * [HardWire](https://github.com/jerometwell/hardwire) - A compile-time non-intrusive dependency injection system.
  * [syringe](https://github.com/Bonemind/syringe) - A simple and basic dependency injection shard for crystal
 
 ## Development Tools
@@ -263,6 +265,7 @@ Contributions are welcome. Please take a quick look at the [contribution guideli
  * [graphql-crystal](https://github.com/ziprandom/graphql-crystal) - [Graphql](http://graphql.org) implementation
  * [kave](https://github.com/jwoertink/kave) - Kemal API Version Extension
  * [kemal-session](https://github.com/kemalcr/kemal-session) - Session handler for Kemal
+ * [mochi](https://github.com/gitlato/mochi) - Authentication shard inspired by Devise supporting: Authenticable, Confirmable, Invitable & more
  * [multi-auth](https://github.com/msa7/multi_auth) - Standardized multi-provider OAuth2 authentication (inspired by omniauth)
  * [praetorian](https://github.com/ilanusse/praetorian) - Minimalist authorization library inspired by Pundit
  * [request_id](https://github.com/SuperPaintman/request-id) - Middleware for generates / pick up a unique request ID for Crystal servers
@@ -333,6 +336,7 @@ Contributions are welcome. Please take a quick look at the [contribution guideli
  * [ai4cr](https://github.com/drhuffman12/ai4cr) - Artificial Intelligence (based on https://github.com/SergioFierens/ai4r)
  * [Cadmium](https://github.com/cadmiumcr/cadmium) - NLP library based heavily on [natural](https://github.com/NaturalNode/natural)
  * [crystal-fann](https://github.com/NeuraLegion/crystal-fann) - FANN (Fast Artifical Neural Network) binding
+ * [mxnet.cr](https://github.com/toddsundsted/mxnet.cr) - Bindings for [MXNet](https://mxnet.incubator.apache.org/)
  * [shainet](https://github.com/NeuraLegion/shainet) - SHAInet (Neural Network in pure crystal)
  * [tensorflow.cr](https://github.com/fazibear/tensorflow.cr) - Bindings for [TensorFlow](https://github.com/tensorflow/tensorflow)
 
@@ -358,6 +362,7 @@ Contributions are welcome. Please take a quick look at the [contribution guideli
  * [i18n.cr](https://github.com/vladfaust/i18n.cr) - Internationalization shard
  * [immutable](https://github.com/lucaong/immutable) - Implementation of thread-safe, persistent, immutable collections
  * [inflector.cr](https://github.com/phoffer/inflector.cr) - Singularize, pluralize, camelize, etc (port from ActiveSupport)
+ * [iterm2](https://github.com/toddsundsted/iterm2) - Display images within the terminal using the ITerm2 Inline Images Protocol
  * [lirith](https://github.com/lirith-engine/lirith) - Graphics engine
  * [m3u8](https://github.com/akiicat/m3u8) - Generate and parse m3u8 playlists for HTTP Live Streaming
  * [message_verifier.cr](https://github.com/danielwestendorf/message_verifier.cr) - Verify and generate Rails `ActiveSupport::MessageVerifier` signed tokens
@@ -371,6 +376,7 @@ Contributions are welcome. Please take a quick look at the [contribution guideli
  * [zaru_crystal](https://github.com/szTheory/zaru_crystal) - Filename sanitization
 
 ## Network Protocols
+ * [amqp-client.cr](https://github.com/cloudamqp/amqp-client.cr) - AMQP 0-9.1, a messaging protocol, implemented by eg. RabbitMQ
  * [bson.cr](https://github.com/jeromegn/bson.cr) - Native BSON implementation
  * [connect-proxy](https://github.com/spider-gazelle/connect-proxy) - Connect method style of HTTP tunnelling / HTTP proxy
  * [cr-xmpp](https://github.com/naqvis/cr-xmpp) - XMPP/Jabber Library
@@ -437,6 +443,7 @@ Contributions are welcome. Please take a quick look at the [contribution guideli
  * [tasker](https://github.com/spider-gazelle/tasker) - A high precision scheduler including timezone aware cron jobs
 
 ## Science and Data analysis
+ * [ishi](https://github.com/toddsundsted/ishi) - Graph plotting package with a small API and sensible defaults powered by gnuplot
  * [linalg](https://github.com/konovod/linalg) - Linear algebra library inspired by MATLAB and SciPy.linalg
  * [num.cr](https://github.com/crystal-data/num.cr) - Numerical computing library supporting N-Dimensional data
  * [predict.cr](https://github.com/RX14/predict.cr) - Satellite prediction library using the sgp4 model
@@ -499,11 +506,14 @@ Contributions are welcome. Please take a quick look at the [contribution guideli
  * [GDAX](https://github.com/mccallofthewild/gdax) - GDAX REST and WebSocket API Wrapper with request signing
  * [gitlab.cr](https://github.com/icyleaf/gitlab.cr) - GitLab API wrapper
  * [google_maps_api](https://github.com/fridgerator/google_maps_api) - Google Maps API
+ * [host_meta](https://github.com/toddsundsted/host_meta) - A Web Host Metadata (https://tools.ietf.org/html/rfc6415) client
  * [kube-client.cr](https://github.com/spoved/kube-client.cr) - Kubernetes API Client
  * [mixpanel-crystal](https://github.com/petoem/mixpanel-crystal) - A library for sending events to Mixpanel
+ * [mollie.cr](https://github.com/tilishop/mollie.cr) - [Mollie](https://www.mollie.com/en/) Payments API wrapper (Creditcard, PayPal, Apple Pay, Sofort, Klarna, ...)
  * [pinboard.cr](https://github.com/oz/pinboard.cr) - [Pinboard](https://pinboard.in) API
  * [raven.cr](https://github.com/sija/raven.cr) - Raven is a client for [Sentry](https://github.com/getsentry/sentry)
  * [twitter-crystal](https://github.com/sferik/twitter-crystal) - A library to access the Twitter API
+ * [web_finger](https://github.com/toddsundsted/web_finger) - A WebFinger (https://tools.ietf.org/html/rfc7033) client
  * [ynab.cr](https://github.com/jaredsmithse/ynab.cr) - A library to interact with your YNAB data
 
 ## Validation
@@ -519,6 +529,7 @@ Contributions are welcome. Please take a quick look at the [contribution guideli
  * [grip](https://github.com/grip-framework/grip) - A microframework for building RESTful web applications, with ease and joy
  * [kemal](https://github.com/kemalcr/kemal) - Lightning Fast, Super Simple web framework. Inspired by Sinatra
  * [lucky](https://github.com/luckyframework/lucky) - Catch bugs early, forget about most performance issues, and spend more time on code instead of debugging and writing tests
+ * [Shivneri](https://github.com/ujjwalguptaofficial/shivneri) - Component based MVC web framework for crystal targeting good code structures, modularity & performance
  * [spider-gazelle](https://github.com/spider-gazelle/spider-gazelle) - A Rails esque web framework with a focus on speed and extensibility
 
 ## Web Servers
@@ -574,6 +585,7 @@ Contributions are welcome. Please take a quick look at the [contribution guideli
  * [crystal-base](https://github.com/ruivieira/crystal-base) - CentOS base docker image for Crystal development
  * [crystal-ctags](https://github.com/SuperPaintman/crystal-ctags) - Ctags generator for Crystal
  * [crystal-dash-docset](https://github.com/Sija/crystal-dash-docset) - [Dash](https://kapeli.com/dash) docset generator
+ * [public_suffix](https://github.com/toddsundsted/public_suffix) - A small library designed to make the Public Suffix List (https://publicsuffix.org/) easier to use
 
 ## DevOps
  * [ansible-crystal](https://github.com/CorbanR/ansible-crystal) - Ansible playbook for installing crystal
