@@ -138,6 +138,7 @@ Contributions are welcome. Please take a quick look at the [contribution guideli
  * [clicr](https://github.com/j8r/clicr) -  A simple declarative command line interface builder
  * [clim](https://github.com/at-grandpa/clim) - Slim command line interface builder
  * [commander](https://github.com/mrrooijen/commander) - Command-line interface builder
+ * [Keimeno](https://github.com/robacarp/keimeno) -  A lightweight text user interface library in Crystal
  * [optarg](https://github.com/mosop/optarg) - Yet another library for parsing command-line options and arguments
  * [OptionParser](https://crystal-lang.org/api/OptionParser.html) - command-line options processing (Crystal stdlib)
  * [Phreak](https://github.com/shinzlet/phreak) - A highly flexible Crystal CLI builder in the style of OptionParser
@@ -328,7 +329,7 @@ Contributions are welcome. Please take a quick look at the [contribution guideli
  * [crometheus](https://gitlab.com/ezrast/crometheus) - A [Prometheus](https://prometheus.io/) client library
  * [crylog](https://github.com/blacksmoke16/crylog) - Flexible logging framework based on Monolog
  * [fluent-logger-crystal](https://github.com/TobiasGSmollett/fluent-logger-crystal) - A structured logger for [Fluentd](https://www.fluentd.org/)
- * [Logger](https://crystal-lang.org/api/Logger.html) - logging utility (Crystal stdlib)
+ * [Log](https://crystal-lang.org/api/Log.html) - logging utility (Crystal stdlib)
  * [statsd.cr](https://github.com/miketheman/statsd.cr) - [Statsd](https://github.com/etsy/statsd) client library
  * [syslog.cr](https://github.com/comandeo/syslog.cr) - Implementation of Syslog client
 
@@ -358,6 +359,7 @@ Contributions are welcome. Please take a quick look at the [contribution guideli
  * [crystal-web-framework-stars](https://github.com/isaced/crystal-web-framework-stars) - Web frameworks for Crystal, most starred on Github
  * [crz](https://github.com/dhruvrajvanshi/crz) - Functional programming library
  * [emoji.cr](https://github.com/veelenga/emoji.cr) - Emoji library
+ * [gphoto2-web.cr](https://github.com/Sija/gphoto2-web.cr) - Web API for libgphoto2
  * [hoop](https://github.com/0x73/hoop) - Building native OSX apps
  * [i18n.cr](https://github.com/vladfaust/i18n.cr) - Internationalization shard
  * [immutable](https://github.com/lucaong/immutable) - Implementation of thread-safe, persistent, immutable collections
@@ -447,6 +449,7 @@ Contributions are welcome. Please take a quick look at the [contribution guideli
  * [linalg](https://github.com/konovod/linalg) - Linear algebra library inspired by MATLAB and SciPy.linalg
  * [num.cr](https://github.com/crystal-data/num.cr) - Numerical computing library supporting N-Dimensional data
  * [predict.cr](https://github.com/RX14/predict.cr) - Satellite prediction library using the sgp4 model
+ * [quartz](https://github.com/RomainFranceschini/quartz) - Modeling and simulation framework
 
 ## Search
  * [hermes](https://github.com/imdrasil/hermes.cr) - Data Mapper pattern implementation for ElastiSearch
@@ -505,11 +508,13 @@ Contributions are welcome. Please take a quick look at the [contribution guideli
  * [discordcr](https://github.com/meew0/discordcr) - A minimalist Discord API library
  * [GDAX](https://github.com/mccallofthewild/gdax) - GDAX REST and WebSocket API Wrapper with request signing
  * [gitlab.cr](https://github.com/icyleaf/gitlab.cr) - GitLab API wrapper
+ * [google](https://github.com/PlaceOS/google) - Google API wrapper
  * [google_maps_api](https://github.com/fridgerator/google_maps_api) - Google Maps API
  * [host_meta](https://github.com/toddsundsted/host_meta) - A Web Host Metadata (https://tools.ietf.org/html/rfc6415) client
  * [kube-client.cr](https://github.com/spoved/kube-client.cr) - Kubernetes API Client
  * [mixpanel-crystal](https://github.com/petoem/mixpanel-crystal) - A library for sending events to Mixpanel
  * [mollie.cr](https://github.com/tilishop/mollie.cr) - [Mollie](https://www.mollie.com/en/) Payments API wrapper (Creditcard, PayPal, Apple Pay, Sofort, Klarna, ...)
+ * [office365](https://github.com/PlaceOS/office365) - Microsoft Graph API wrapper
  * [pinboard.cr](https://github.com/oz/pinboard.cr) - [Pinboard](https://pinboard.in) API
  * [raven.cr](https://github.com/sija/raven.cr) - Raven is a client for [Sentry](https://github.com/getsentry/sentry)
  * [twitter-crystal](https://github.com/sferik/twitter-crystal) - A library to access the Twitter API
