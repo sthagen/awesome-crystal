@@ -5,6 +5,9 @@ require "http/client"
 require "colorize"
 require "option_parser"
 
+# A shard must have been built sometime in this span in order to be considered active.
+private TIME_WINDOW = 1.year
+
 module EnumConverter(T)
   def self.from_yaml(ctx : YAML::ParseContext, node : YAML::Nodes::Node) : T
     unless node.is_a?(YAML::Nodes::Scalar)
@@ -19,6 +22,7 @@ module EnumConverter(T)
   end
 end
 
+GITHUB_CLIENT     = HTTP::Client.new "api.github.com", tls: true
 GITLAB_CLIENT     = HTTP::Client.new "gitlab.com", tls: true
 TRAVIS_CLIENT     = HTTP::Client.new "api.travis-ci.org", tls: true
 TRAVIS_PRO_CLIENT = HTTP::Client.new "api.travis-ci.com", tls: true
@@ -30,7 +34,7 @@ enum VC
   Github
   Gitlab
 
-  # Returns the protocal and domain for `self`.
+  # Returns the protocol and domain for `self`.
   def host : String
     case self
     when .github? then "https://github.com"
@@ -56,36 +60,35 @@ end
 # Represents a shard within `README.md`.
 class Shard
   include YAML::Serializable
-
-  # Manually keep track of shards using `CI::Actions` since there
-  # is not currently a way to resolve if a shard uses it.
-  private USING_GH_ACTIONS = {
-    "cadmiumcr/cadmium",
-    "blacksmoke16/assert",
-    "soveran/toro",
-    "soveran/ohm-crystal",
-    "soveran/stal-crystal",
-    "soveran/resp-crystal",
-  }
+  include Comparable(Shard)
 
   # Shards that are exempt from reporting.
   # Mainly for utilities and plugins that
   # can't really be tested autonomously.
   private EXEMPT_SHARDS = {
     "bcardiff/crystal-ast-helper",
-    "crystal-lang/clang.cr",
+    "crenv/crenv",
+    "crystal-community/crystal-patterns",
+    "crystal-lang-tools/crystal-ide",
     "crystal-lang-tools/Crystal.tmbundle",
     "crystal-lang-tools/sublime-crystal",
-    "crystal-lang-tools/crystal-ide",
+    "crystal-lang-tools/vscode-crystal-lang",
+    "crystal-lang/clang.cr",
+    "crystal-lang/crystal-mysql",
     "dotmilk/emacs-crystal-mode",
-    "elorest/vim-slang",
     "elorest/cry",
+    "elorest/vim-slang",
+    "exercism/crystal",
     "g3ortega/vscode-crystal",
+    "https://github.com/will/crystal-pg",
     "jhass/DeBot",
     "juanedi/crystal-spacemacs-layer",
+    "marciogm/asdf-crystal",
     "ruivieira/crystal-base",
     "Sija/crystal-dash-docset",
     "veelenga/crystal-zsh",
+    "vscode-crystal-lang",
+    "will/crystal-pg",
   }
 
   # The owner of the shard's repo.
@@ -147,10 +150,10 @@ class Shard
       responses[CI::Drone] = Array(DroneBuild).from_json(response.body).find(&.started).try &.started
     end
 
-    # Manually set the shard to use GH actions if its one in a static list.
-    # Also assume it last ran today since there isn't a way to resolve it ATM.
-    if USING_GH_ACTIONS.includes? "#{@owner}/#{@name}"
-      responses[CI::Actions] = Time.utc
+    response = GITHUB_CLIENT.get("/repos/#{@owner}/#{@name}/actions/runs", headers: HTTP::Headers{"Accept" => "application/vnd.github.v3+json"})
+
+    if response.status.success?
+      responses[CI::Actions] = Array(GHActionsBuild).from_json(response.body, root: "workflow_runs").first?.try &.created_at
     end
 
     # Set exempt shards last build time to now.
@@ -176,8 +179,12 @@ class Shard
   # A `String` representation of `self`.
   #
   # Controls how `self` is formatted within the report.
-  def to_s : String
-    "#{@vc.host}/#{@owner}/#{@name} - @#{@owner}\n"
+  def to_s(io : IO) : Nil
+    io.puts "#{@vc.host}/#{@owner}/#{@name} - @#{@owner}"
+  end
+
+  def <=>(other : self) : Int32
+    @owner <=> other.owner
   end
 
   # Resolves the *responses* hash into a `CI` provider and `last_build` time.
@@ -189,7 +196,7 @@ class Shard
       {CI::None, nil}
     when 1
       responses.first
-    when .> 1
+    else
       if responses.values.all?
         responses.max_by { |_k, v| v.not_nil! }
       else
@@ -222,6 +229,11 @@ struct DroneBuild
   getter started : Time
 end
 
+# Represents a build within `CI::Actions`.
+record GHActionsBuild, created_at : Time do
+  include JSON::Serializable
+end
+
 # Type to wrap the shard list.
 #
 # Provides methods used in the cli to interact with `README.md` and the shard list.
@@ -233,6 +245,12 @@ record ShardList, shards : Array(Shard) = [] of Shard do
 
   # Parses `README.md` to build out the shard list, resolving the CI/VC of each shard.
   def self.initialize : self
+    if (gh_username = ENV["GH_USERNAME"]?) && (gh_token = ENV["GH_TOKEN"]?)
+      GITHUB_CLIENT.basic_auth(gh_username, gh_token)
+    else
+      raise "Missing GitHub credentials ENV vars. Define GH_USERNAME and GH_TOKEN in order to authenticate with the GitHub API.\n\nNOTE: The GH token does not need to have any permissions."
+    end
+
     rm = Readme.new
     shard_list = new
 
@@ -267,32 +285,32 @@ record ShardList, shards : Array(Shard) = [] of Shard do
   # Generates the report file based on the current `OUT_FILE`
   def self.generate_report : Nil
     File.open(REPORT_FILE, "w") do |file|
-      file << "### No CI\n"
-      file << no_ci.join(&.to_s) << '\n'
+      file.puts "### No CI"
+      no_ci.join("", file) { |s, io| s.to_s io }
+      file << '\n'
 
-      file << "### CI never built\n"
-      file << never_built.join(&.to_s) << '\n'
+      file.puts "### CI Never Built"
+      never_built.join("", file) { |s, io| s.to_s io }
+      file << '\n'
 
-      file << "### No not built within last 30 days\n"
-      file << not_within_30_days.join(&.to_s)
+      file.puts "### Not Active"
+      not_within(TIME_WINDOW).join("", file) { |s, io| s.to_s io }
     end
   end
 
   # Returns an array of shards that do not have CI setup.
   def self.no_ci : Array(Shard)
-    with_ci(:none).sort_by(&.owner)
+    with_ci(:none).sort
   end
 
   # Returns an array of shards that have CI but a built never ran.
   def self.never_built : Array(Shard)
-    read.shards.select { |s| !s.ci.none? && !s.last_build }.sort_by(&.owner)
+    read.shards.select { |s| !s.ci.none? && !s.last_build }.sort
   end
 
-  # Returns an array of shards that has CI but the last build was over 30 days ago.
-  #
-  # NOTE: This can/will eventually be changed to shards that haven't passed in x days.
-  def self.not_within_30_days : Array(Shard)
-    read.shards.select { |s| !s.ci.none? && s.last_build && (s.last_build.not_nil! <= 30.days.ago) }.sort_by(&.owner)
+  # Returns an array of shards that has CI but the last build was over *span* days ago.
+  def self.not_within(span : Time::Span | Time::MonthSpan) : Array(Shard)
+    read.shards.select { |s| !s.ci.none? && s.last_build && (s.last_build.not_nil! <= span.ago) }.sort
   end
 
   # Serializes *OUT_FILE* into `self`.
@@ -313,10 +331,10 @@ OptionParser.parse do |parser|
   parser.on("-g", "--generate", "Generate the report from the current shard list") { ShardList.generate_report; exit }
   parser.on("-d TYPE", "--delete TYPE", "Removes shards from the README of the given TYPE") do |type|
     shards = case type
-             when "no_ci"              then ShardList.no_ci
-             when "never_built"        then ShardList.never_built
-             when "not_within_30_days" then ShardList.not_within_30_days
-             else                           abort "Invalid type: #{type}"
+             when "no_ci"       then ShardList.no_ci
+             when "never_built" then ShardList.never_built
+             when "not_active"  then ShardList.not_within TIME_WINDOW
+             else                    abort "Invalid type: #{type}"
              end
 
     # Get an array of each line in the README
