@@ -94,6 +94,7 @@ Contributions are welcome. Please take a quick look at the [contribution guideli
  * [qr-code](https://github.com/spider-gazelle/qr-code) - QR Code generator
  * [radix](https://github.com/luislavena/radix) - Radix Tree implementation
  * [s2_cells](https://github.com/spider-gazelle/s2_cells) - [S2 Geometry](https://s2geometry.io/devguide/s2cell_hierarchy.html) for spatial indexing
+ * [splay_tree_map](https://github.com/wyhaines/splay_tree_map.cr) - Splay Tree implementation that conforms to the Hash ducktype
 
 ## Blockchain
  * [Axentro](https://github.com/Axentro/Axentro) - A custom blockchain platform
@@ -129,6 +130,7 @@ Contributions are welcome. Please take a quick look at the [contribution guideli
 
 ## CLI Utils
  * [climate](https://github.com/Sija/climate.cr) - Tiny tool to make your CLI output 🌈  coloured
+ * [coin](https://github.com/caian-org/coin) - Command-line application that performs currency conversion via the [Fixer API](https://fixer.io)
  * [cride](https://github.com/j8r/cride) - A light CLI text editor/IDE
  * [lff](https://github.com/mkdika/lff-cr) - Simple and straightforward large files finder utility in command line
  * [oq](https://github.com/Blacksmoke16/oq) - A performant, and portable jq wrapper to facilitate the consumption and output of formats other than JSON; using [jq](https://github.com/stedolan/jq) filters to transform the data.
@@ -206,7 +208,8 @@ Contributions are welcome. Please take a quick look at the [contribution guideli
  * [queryit](https://github.com/hugopl/queryit) - A setupless terminal based SQL query runner.
 
 ## Debugging
- * [debug.cr](https://github.com/Sija/debug.cr) - `debug!(…)` macro for `pp`-style debugging
+* [backtracer.cr](https://github.com/Sija/backtracer.cr) - Shard aiming to assist with parsing backtraces into a structured form
+* [debug.cr](https://github.com/Sija/debug.cr) - `debug!(…)` macro for `pp`-style debugging
 
 ## Dependency Injection
  * [Athena Dependency Injection](https://github.com/athena-framework/dependency-injection) - Robust dependency injection service container framework
@@ -334,6 +337,7 @@ Contributions are welcome. Please take a quick look at the [contribution guideli
  * [pinger](https://github.com/spider-gazelle/pinger) - Ping IP addresses and DNS entries without requiring sudo
  * [port_midi](https://github.com/jimm/crystal_port_midi) - Crystal C bindings for the PortMIDI cross-platform MIDI I/O library
  * [retriable.cr](https://github.com/Sija/retriable.cr) - Simple DSL to retry failed code blocks
+ * [serf-handler.cr](https://github.com/wyhaines/serf-handler.cr) - Framework for building Serf handlers, with a suite of useful builtin capabilities
  * [simple_retry](https://github.com/spider-gazelle/simple_retry) - Simple tool for retrying failed code blocks
  * [sslscan.cr](https://github.com/NeuraLegion/sslscan.cr) - Crystal shard wrapping the rbsec/sslscan utility
  * [version_tools](https://github.com/anicholson/crystal-version-tools) - Version-dependent behaviour, specified at compile-time
@@ -356,6 +360,7 @@ Contributions are welcome. Please take a quick look at the [contribution guideli
  * [OAuth](https://crystal-lang.org/api/OAuth.html) - OAuth consumer (Crystal stdlib)
  * [OAuth2](https://crystal-lang.org/api/OAuth2.html) - OAuth2 client (Crystal stdlib)
  * [OpenSSL](https://crystal-lang.org/api/OpenSSL.html) - bindings to libssl (Crystal stdlib)
+ * [stomp](https://github.com/spider-gazelle/stomp) - STOMP protocol
  * [telnet.cr](https://github.com/spider-gazelle/telnet.cr) - Telnet protocol
  * [transfer_more](https://git.sceptique.eu/Sceptique/transfer_more) - Clone of transfer.sh to uploads files
 
